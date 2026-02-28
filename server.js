@@ -22,3 +22,7 @@ app.use('/api/admin', adminRoutes);
 app.listen(process.env.PORT || 4000, () =>
   console.log("Server running")
 );
+
+app.get("/", (req, res) => {
+  res.send("Backend is running");
+});
