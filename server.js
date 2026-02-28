@@ -6,6 +6,8 @@ const cors = require('cors');
 const signupRoutes = require('./routes/signup');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
+const delegateRoutes = require("./routes/delegate");
+
 
 const app = express();
 app.use(cors());
@@ -18,6 +20,7 @@ mongoose.connect(process.env.MONGO_URI)
 app.use('/api/signup', signupRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
+app.use("/api/delegate", delegateRoutes);
 
 app.listen(process.env.PORT || 4000, () =>
   console.log("Server running")
@@ -26,3 +29,4 @@ app.listen(process.env.PORT || 4000, () =>
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
+
