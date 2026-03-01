@@ -1,6 +1,3 @@
-
-module.exports = router;
-
 const express = require('express');
 const adminAuth = require('../middleware/adminAuth');
 const Signup = require('../models/Signup');
