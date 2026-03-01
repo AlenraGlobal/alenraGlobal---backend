@@ -7,6 +7,7 @@ const signupRoutes = require('./routes/signup');
 const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const delegateRoutes = require("./routes/delegate");
+const contactRoutes = require('./routes/contact');
 
 
 const app = express();
@@ -21,6 +22,7 @@ app.use('/api/signup', signupRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use("/api/delegate", delegateRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.listen(process.env.PORT || 4000, () =>
   console.log("Server running")
