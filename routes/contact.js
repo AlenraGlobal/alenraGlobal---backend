@@ -1,6 +1,6 @@
 // routes/contact.js
 const express = require('express');
-const ContactMessage = require('../models/ContactMessage');
+const ContactMessage = require('../models/Contact');
 
 const router = express.Router();
 
