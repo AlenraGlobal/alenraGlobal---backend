@@ -73,4 +73,31 @@ router.patch("/contacts/:id", async (req, res) => {
   }
 });
 
+router.delete("/signups/:id", async (req, res) => {
+  try {
+    await Signup.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.delete("/delegates/:id", async (req, res) => {
+  try {
+    await Delegate.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.delete("/contacts/:id", async (req, res) => {
+  try {
+    await Contact.findByIdAndDelete(req.params.id);
+    res.json({ success: true });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
