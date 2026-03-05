@@ -4,14 +4,25 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const signupRoutes = require('./routes/signup');
-const authRoutes = require('./routes/auth');
 const adminRoutes = require('./routes/admin');
 const delegateRoutes = require("./routes/delegate");
 const contactRoutes = require('./routes/contact');
 
-
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: [
+    "http://127.0.0.1:5500",
+    "http://localhost:5500",
+    "https://alenraglobal.org",
+    "https://www.alenraglobal.org"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+}));
+
+app.options("*", cors());
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
@@ -19,16 +30,12 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.log(err));
 
 app.use('/api/signup', signupRoutes);
-app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use("/api/delegate", delegateRoutes);
 app.use('/api/contact', contactRoutes);
 
-app.listen(process.env.PORT || 4000, () =>
-  console.log("Server running")
-);
+app.listen(process.env.PORT || 4000, () => console.log("Server running"));
 
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
-

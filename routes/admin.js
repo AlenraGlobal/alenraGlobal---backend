@@ -10,7 +10,7 @@ const router = express.Router();
 router.get('/dashboard', adminAuth, (req, res) => {
   res.json({
     message: 'Admin dashboard',
-    username: req.admin.username
+    email: req.admin.email
   });
 });
 
