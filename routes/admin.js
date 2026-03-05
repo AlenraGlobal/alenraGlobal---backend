@@ -6,9 +6,7 @@ const Contact = require('../models/Contact');
 
 const router = express.Router();
 
-router.options("*", (req, res) => {
-  res.sendStatus(200);
-});
+
 
 // Dashboard welcome
 router.get('/dashboard', adminAuth, (req, res) => {
