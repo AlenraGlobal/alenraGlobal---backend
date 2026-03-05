@@ -23,11 +23,8 @@ app.use(cors({
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-// Express 5-safe preflight handler (NO WILDCARDS)
-app.options("/api/admin/:id", cors());
-app.options("/api/admin/*", cors());
-app.options("/api/*", cors());
-app.options("*", (req, res) => res.sendStatus(200));
+// ❌ REMOVE ALL app.options() LINES
+// Express 5 handles OPTIONS automatically when using cors()
 
 app.use(express.json());
 
@@ -40,8 +37,8 @@ app.use('/api/admin', adminRoutes);
 app.use("/api/delegate", delegateRoutes);
 app.use('/api/contact', contactRoutes);
 
-app.listen(process.env.PORT || 4000, () => console.log("Server running"));
-
 app.get("/", (req, res) => {
   res.send("Backend is running");
 });
+
+app.listen(process.env.PORT || 4000, () => console.log("Server running"));

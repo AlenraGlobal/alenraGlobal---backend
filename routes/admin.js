@@ -34,4 +34,43 @@ router.get('/contacts', adminAuth, async (req, res) => {
   res.json(data);
 });
 
+router.patch("/signups/:id", async (req, res) => {
+  try {
+    const updated = await Signup.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.patch("/delegates/:id", async (req, res) => {
+  try {
+    const updated = await Delegate.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+router.patch("/contacts/:id", async (req, res) => {
+  try {
+    const updated = await Contact.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true }
+    );
+    res.json(updated);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
 module.exports = router;
