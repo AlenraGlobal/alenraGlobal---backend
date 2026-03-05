@@ -17,11 +17,11 @@ app.use(cors({
     "https://alenraglobal.org",
     "https://www.alenraglobal.org"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT",  "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-
+app.options("*", cors());
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
