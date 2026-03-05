@@ -10,18 +10,25 @@ const contactRoutes = require('./routes/contact');
 
 const app = express();
 
+const allowedOrigins = [
+  "http://127.0.0.1:5500",
+  "http://localhost:5500",
+  "https://alenraglobal.org",
+  "https://www.alenraglobal.org"
+];
+
 app.use(cors({
-  origin: [
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    "https://alenraglobal.org",
-    "https://www.alenraglobal.org"
-  ],
-  methods: ["GET", "POST", "PUT",  "PATCH", "DELETE", "OPTIONS"],
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 }));
 
-app.options("*", cors());
+// Express 5-safe preflight handler (NO WILDCARDS)
+app.options("/api/admin/:id", cors());
+app.options("/api/admin/*", cors());
+app.options("/api/*", cors());
+app.options("*", (req, res) => res.sendStatus(200));
+
 app.use(express.json());
 
 mongoose.connect(process.env.MONGO_URI)
